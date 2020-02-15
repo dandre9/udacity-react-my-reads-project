@@ -7,15 +7,20 @@ class SearchBook extends Component {
   state = {
     booksFound: []
   };
+  timeOut;
 
   searchBook = query => {
-    search(query.trim()).then(response => {
-      let { booksFound } = this.state;
+    clearTimeout(this.timeOut);
 
-      booksFound = !response || response.error ? [] : response;
+    this.timeOut = setTimeout(() => {
+      search(query.trim()).then(response => {
+        let { booksFound } = this.state;
 
-      this.setState({ booksFound });
-    });
+        booksFound = !response || response.error ? [] : response;
+
+        this.setState({ booksFound });
+      });
+    }, 500);
   };
 
   render() {
