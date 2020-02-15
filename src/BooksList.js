@@ -3,7 +3,7 @@ import Book from "./Book";
 
 class BooksList extends Component {
   render() {
-    const { books, categories } = this.props;
+    const { books, categories, updateShelf } = this.props;
 
     return (
       <div className="search-books-results">
@@ -13,7 +13,7 @@ class BooksList extends Component {
           <ol className="books-grid">
             {books.map(book => (
               <li key={book.id}>
-                <Book book={book} categories={categories} />
+                <Book book={book} categories={categories} updateShelf={updateShelf} />
               </li>
             ))}
           </ol>

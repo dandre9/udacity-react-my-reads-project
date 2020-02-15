@@ -11,10 +11,25 @@ class SearchBook extends Component {
   timeOut;
 
   componentDidMount() {
-    getAll().then(response => {
-      this.setState({ userBooks: response });
-    });
+    this.updateShelf();
   }
+
+  updateShelf = () => {
+    getAll().then(response => {
+      //TODO: Handle errors
+      let { booksFound } = this.state;
+
+      booksFound.forEach((bookFound, index) => {
+        response.forEach(userBook => {
+          if (userBook.id === bookFound.id) {
+            console.log(userBook);
+            booksFound[index] = userBook;
+          }
+        });
+      });
+      this.setState({ userBooks: response, booksFound });
+    });
+  };
 
   searchBook = query => {
     clearTimeout(this.timeOut);
@@ -49,7 +64,11 @@ class SearchBook extends Component {
     return (
       <div className="search-books">
         <SearchInput searchBook={this.searchBook} />
-        <SearchResults booksFound={booksFound} categories={categories} />
+        <SearchResults
+          updateShelf={this.updateShelf}
+          booksFound={booksFound}
+          categories={categories}
+        />
       </div>
     );
   }

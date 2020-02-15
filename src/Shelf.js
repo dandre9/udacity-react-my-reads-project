@@ -9,10 +9,15 @@ class Shelf extends Component {
   };
 
   componentDidMount() {
+    this.updateShelf();
+  }
+
+  updateShelf = () => {
     getAll().then(response => {
+      //TODO: Handle errors
       this.setState({ userBooks: response });
     });
-  }
+  };
 
   render() {
     const { categories } = this.props;
@@ -27,6 +32,7 @@ class Shelf extends Component {
           <div>
             {categories.map(category => (
               <ShelfCategory
+                updateShelf={this.updateShelf}
                 key={category.key}
                 category={category.name}
                 books={userBooks.filter(book => book.shelf === category.key)}

@@ -3,20 +3,27 @@ import { update } from "./BooksAPI";
 
 class CategoryChanger extends Component {
   handleSelect = event => {
-    update(event);
+    const { book, updateShelf } = this.props;
+    const { value } = event.target;
+
+    update(book, value).then(response => {
+      updateShelf(response);
+    });
   };
 
   render() {
-    const { categories, selectedCategory } = this.props;
+    const { categories, book } = this.props;
 
     return (
       <div className="book-shelf-changer">
-        <select value={selectedCategory || "none"} onChange={this.handleSelect}>
+        <select value={book.shelf || "none"} onChange={this.handleSelect}>
           <option value="move" disabled>
             Move to...
           </option>
           {categories.map(category => (
-            <option value={category.key}>{category.name}</option>
+            <option key={category.key} value={category.key}>
+              {category.name}
+            </option>
           ))}
           <option value="none">None</option>
         </select>

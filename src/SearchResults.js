@@ -2,11 +2,15 @@ import React from "react";
 import BooksList from "./BooksList";
 
 const SearchResults = props => {
-  const { booksFound, categories } = props;
+  const { booksFound, categories, updateShelf } = props;
 
   return (
     <div className="search-books-results">
-      <BooksList books={booksFound} categories={categories} />
+      <BooksList
+        updateShelf={updateShelf}
+        books={booksFound}
+        categories={categories}
+      />
     </div>
   );
 };

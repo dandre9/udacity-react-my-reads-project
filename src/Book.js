@@ -3,7 +3,7 @@ import CategoryChanger from "./CategoryChanger";
 
 class Book extends Component {
   render() {
-    const { book, categories } = this.props;
+    const { book, categories, updateShelf } = this.props;
 
     return (
       <div className="book">
@@ -18,7 +18,8 @@ class Book extends Component {
             }}
           ></div>
           <CategoryChanger
-            selectedCategory={book.shelf}
+          updateShelf={updateShelf}
+            book={book}
             categories={categories}
           />
         </div>
