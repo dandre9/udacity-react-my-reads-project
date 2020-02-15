@@ -8,7 +8,7 @@ class BooksList extends Component {
     return (
       <div className="search-books-results">
         {books.length === 0 ? (
-          <span className="books-grid">The are no books in this shelf.</span>
+          <span className="books-grid">The are no books to display.</span>
         ) : (
           <ol className="books-grid">
             {books.map(book => (
