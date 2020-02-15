@@ -7,13 +7,17 @@ class BooksList extends Component {
 
     return (
       <div className="search-books-results">
-        <ol className="books-grid">
-          {books.map(book => (
-            <li key={book.id}>
-              <Book book={book} />
-            </li>
-          ))}
-        </ol>
+        {books.length === 0 ? (
+          <span className="books-grid">The are no books in this shelf.</span>
+        ) : (
+          <ol className="books-grid">
+            {books.map(book => (
+              <li key={book.id}>
+                <Book book={book} />
+              </li>
+            ))}
+          </ol>
+        )}
       </div>
     );
   }
