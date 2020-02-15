@@ -12,7 +12,8 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+              backgroundImage: `url(${book.imageLinks &&
+                book.imageLinks.smallThumbnail})`
             }}
           ></div>
           <div className="book-shelf-changer">
