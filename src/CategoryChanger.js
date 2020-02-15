@@ -1,16 +1,20 @@
 import React, { Component } from "react";
+import { update } from "./BooksAPI";
 
 class CategoryChanger extends Component {
+  handleSelect = event => {
+    update(event);
+  };
+
   render() {
-    const { categories } = this.props;
+    const { categories, selectedCategory } = this.props;
 
     return (
       <div className="book-shelf-changer">
-        <select>
+        <select value={selectedCategory || "none"} onChange={this.handleSelect}>
           <option value="move" disabled>
             Move to...
           </option>
-          <option value="currentlyReading">Currently Reading</option>
           {categories.map(category => (
             <option value={category.key}>{category.name}</option>
           ))}

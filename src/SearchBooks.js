@@ -1,22 +1,41 @@
 import React, { Component } from "react";
 import SearchInput from "./SearchInput";
 import SearchResults from "./SearchResults";
-import { search } from "./BooksAPI";
+import { search, getAll } from "./BooksAPI";
 
 class SearchBook extends Component {
   state = {
-    booksFound: []
+    booksFound: [],
+    userBooks: []
   };
   timeOut;
+
+  componentDidMount() {
+    getAll().then(response => {
+      this.setState({ userBooks: response });
+    });
+  }
 
   searchBook = query => {
     clearTimeout(this.timeOut);
 
     this.timeOut = setTimeout(() => {
       search(query.trim()).then(response => {
-        let { booksFound } = this.state;
+        let { booksFound, userBooks } = this.state;
 
-        booksFound = !response || response.error ? [] : response;
+        if (!response || response.error) {
+          booksFound = [];
+        } else {
+          booksFound = response;
+          booksFound.forEach((bookFound, index) => {
+            userBooks.forEach(userBook => {
+              if (userBook.id === bookFound.id) {
+                console.log(userBook);
+                booksFound[index] = userBook;
+              }
+            });
+          });
+        }
 
         this.setState({ booksFound });
       });
@@ -26,7 +45,7 @@ class SearchBook extends Component {
   render() {
     const { booksFound } = this.state;
     const { categories } = this.props;
-
+    console.log(booksFound);
     return (
       <div className="search-books">
         <SearchInput searchBook={this.searchBook} />

@@ -17,7 +17,10 @@ class Book extends Component {
                 book.imageLinks.smallThumbnail})`
             }}
           ></div>
-          <CategoryChanger categories={categories} />
+          <CategoryChanger
+            selectedCategory={book.shelf}
+            categories={categories}
+          />
         </div>
         <div className="book-title">{book.title}</div>
         <div className="book-authors">{book.authors}</div>
