@@ -3,19 +3,10 @@ import { Link } from "react-router-dom";
 import { getAll } from "./BooksAPI";
 import ShelfCategory from "./ShelfCategory";
 
-/* An ideia for the future to dynamically create others shelves */
-const categories = [
-  { key: "currentlyReading", name: "Currently Reading" },
-  { key: "wantToRead", name: "Want to Read" },
-  { key: "read", name: "Read" }
-];
-
 class Shelf extends Component {
   state = {
     userBooks: []
   };
-
-  //TODO: Function to filter books by shelf
 
   componentDidMount() {
     getAll().then(response => {
@@ -24,6 +15,7 @@ class Shelf extends Component {
   }
 
   render() {
+    const { categories } = this.props;
     const { userBooks } = this.state;
 
     return (
@@ -36,8 +28,9 @@ class Shelf extends Component {
             {categories.map(category => (
               <ShelfCategory
                 key={category.key}
-                category={category}
+                category={category.name}
                 books={userBooks.filter(book => book.shelf === category.key)}
+                categories={categories}
               />
             ))}
           </div>

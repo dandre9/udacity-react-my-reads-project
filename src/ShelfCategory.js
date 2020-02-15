@@ -4,12 +4,12 @@ import BooksList from "./BooksList";
 class ShelfCategory extends Component {
   //TODO: Function to filter books by shelf
   render() {
-    const { books } = this.props;
+    const { books, category, categories } = this.props;
 
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">Currently Reading</h2>
-        <BooksList books={books} />
+        <h2 className="bookshelf-title">{category}</h2>
+        <BooksList books={books} categories={categories} />
       </div>
     );
   }

@@ -25,11 +25,12 @@ class SearchBook extends Component {
 
   render() {
     const { booksFound } = this.state;
+    const { categories } = this.props;
 
     return (
       <div className="search-books">
         <SearchInput searchBook={this.searchBook} />
-        <SearchResults booksFound={booksFound} />
+        <SearchResults booksFound={booksFound} categories={categories} />
       </div>
     );
   }
