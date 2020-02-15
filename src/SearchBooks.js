@@ -9,22 +9,13 @@ class SearchBook extends Component {
   };
 
   searchBook = query => {
-    if (!query.trim()) {
-      this.setState({ booksFound: [] });
-    } else {
-      search(query.trim()).then(response => {
-        let { booksFound } = this.state;
+    search(query.trim()).then(response => {
+      let { booksFound } = this.state;
 
-        if (response.error) {
-          console.error(response.error);
-          booksFound = [];
-        } else {
-          booksFound = response;
-        }
+      booksFound = !response || response.error ? [] : response;
 
-        this.setState({ booksFound });
-      });
-    }
+      this.setState({ booksFound });
+    });
   };
 
   render() {
