@@ -29,7 +29,7 @@ class BooksList extends Component {
 }
 
 BooksList.propTypes = {
-  books: PropTypes.array.isRequired,
+  books: PropTypes.array,
   categories: PropTypes.array.isRequired,
   updateShelf: PropTypes.func.isRequired
 };
