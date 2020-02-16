@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getAll } from "./BooksAPI";
 import ShelfCategory from "./ShelfCategory";
+import PropTypes from "prop-types";
 
 class Shelf extends Component {
   state = {
@@ -14,7 +15,6 @@ class Shelf extends Component {
 
   updateShelf = () => {
     getAll().then(response => {
-      //TODO: Handle errors
       this.setState({ userBooks: response });
     });
   };
@@ -48,5 +48,9 @@ class Shelf extends Component {
     );
   }
 }
+
+Shelf.propTypes = {
+  categories: PropTypes.array.isRequired
+};
 
 export default Shelf;

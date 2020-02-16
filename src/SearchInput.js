@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class SearchInput extends Component {
   state = {
@@ -35,5 +36,9 @@ class SearchInput extends Component {
     );
   }
 }
+
+SearchInput.propTypes = {
+  searchBook: PropTypes.func.isRequired
+};
 
 export default SearchInput;

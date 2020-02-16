@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { update } from "./BooksAPI";
+import PropTypes from "prop-types";
 
 class CategoryChanger extends Component {
   handleSelect = event => {
@@ -31,5 +32,11 @@ class CategoryChanger extends Component {
     );
   }
 }
+
+CategoryChanger.propTypes = {
+  books: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired
+};
 
 export default CategoryChanger;

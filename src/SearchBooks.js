@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchInput from "./SearchInput";
 import SearchResults from "./SearchResults";
 import { search, getAll } from "./BooksAPI";
+import PropTypes from "prop-types";
 
 class SearchBook extends Component {
   state = {
@@ -16,13 +17,11 @@ class SearchBook extends Component {
 
   updateShelf = () => {
     getAll().then(response => {
-      //TODO: Handle errors
       let { booksFound } = this.state;
 
       booksFound.forEach((bookFound, index) => {
         response.forEach(userBook => {
           if (userBook.id === bookFound.id) {
-            console.log(userBook);
             booksFound[index] = userBook;
           }
         });
@@ -73,5 +72,9 @@ class SearchBook extends Component {
     );
   }
 }
+
+SearchBook.propTypes = {
+  categories: PropTypes.array.isRequired
+};
 
 export default SearchBook;

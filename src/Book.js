@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CategoryChanger from "./CategoryChanger";
+import PropTypes from "prop-types";
 
 class Book extends Component {
   render() {
@@ -18,7 +19,7 @@ class Book extends Component {
             }}
           ></div>
           <CategoryChanger
-          updateShelf={updateShelf}
+            updateShelf={updateShelf}
             book={book}
             categories={categories}
           />
@@ -29,5 +30,11 @@ class Book extends Component {
     );
   }
 }
+
+Book.propTypes = {
+  books: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired
+};
 
 export default Book;
