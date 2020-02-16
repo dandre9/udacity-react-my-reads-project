@@ -13,6 +13,7 @@ class Shelf extends Component {
     this.updateShelf();
   }
 
+  /* Loads the books of the shelf */
   updateShelf = () => {
     getAll().then(response => {
       this.setState({ userBooks: response });

@@ -11,6 +11,7 @@ class SearchInput extends Component {
     const { value } = event.target;
     const { searchBook } = this.props;
 
+    /* Send query via callback to make an API search request */
     searchBook(value);
 
     this.setState({ query: value });

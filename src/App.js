@@ -11,22 +11,16 @@ const categories = [
   { key: "read", name: "Read" }
 ];
 
-class BooksApp extends React.Component {
-  render() {
-    return (
-      <div className="app">
-        <Route
-          exact
-          path="/"
-          render={() => <Shelf categories={categories} />}
-        />
-        <Route
-          path="/search"
-          render={() => <SearchBooks categories={categories} />}
-        />
-      </div>
-    );
-  }
-}
+const BooksApp = () => {
+  return (
+    <div className="app">
+      <Route exact path="/" render={() => <Shelf categories={categories} />} />
+      <Route
+        path="/search"
+        render={() => <SearchBooks categories={categories} />}
+      />
+    </div>
+  );
+};
 
 export default BooksApp;

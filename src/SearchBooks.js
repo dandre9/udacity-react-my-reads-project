@@ -15,17 +15,26 @@ class SearchBook extends Component {
     this.updateShelf();
   }
 
+  updateBookCategory = (books, booksShelf) => {
+    /* Compare user books to the search result so
+      the book category can be updated */
+    books.forEach((bookFound, index) => {
+      booksShelf.forEach(userBook => {
+        if (userBook.id === bookFound.id) {
+          books[index] = userBook;
+        }
+      });
+    });
+
+    return books;
+  };
+
   updateShelf = () => {
     getAll().then(response => {
       let { booksFound } = this.state;
 
-      booksFound.forEach((bookFound, index) => {
-        response.forEach(userBook => {
-          if (userBook.id === bookFound.id) {
-            booksFound[index] = userBook;
-          }
-        });
-      });
+      booksFound = this.updateBookCategory(booksFound, response);
+
       this.setState({ userBooks: response, booksFound });
     });
   };
@@ -40,15 +49,7 @@ class SearchBook extends Component {
         if (!response || response.error) {
           booksFound = [];
         } else {
-          booksFound = response;
-          booksFound.forEach((bookFound, index) => {
-            userBooks.forEach(userBook => {
-              if (userBook.id === bookFound.id) {
-                console.log(userBook);
-                booksFound[index] = userBook;
-              }
-            });
-          });
+          booksFound = this.updateBookCategory(response, userBooks);
         }
 
         this.setState({ booksFound });
@@ -59,7 +60,7 @@ class SearchBook extends Component {
   render() {
     const { booksFound } = this.state;
     const { categories } = this.props;
-    console.log(booksFound);
+
     return (
       <div className="search-books">
         <SearchInput searchBook={this.searchBook} />
